@@ -1,5 +1,5 @@
 import Text from './text';
-import {TextInput, PickerField} from './form';
+import {TextInput, PickerField, FormFieldLabel} from './form';
 import Button, {SelectableButton} from './button';
 import Icon, {CircularIcon} from './icon';
 import Card from './card';
@@ -14,8 +14,10 @@ export {
     CircularIcon, 
     Icon,  
     Text,
+    
     TextInput,
-    PickerField
+    PickerField,
+    FormFieldLabel
 
     
     

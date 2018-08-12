@@ -1,27 +1,27 @@
 
 const services = [
     {
-        serviceId: "cash-deposit",
+        serviceRoute: "cash-deposit",
         "title": "Cash Deposit",
         "subtitle": "Deposit cash at branch"
     },
     {
-        serviceId: "address-change",
+        serviceRoute: "address-change",
         "title": "Address Change",
         "subtitle": "Change primary communication address"
     },
     {
-        serviceId: "telegraphic-transfer",
+        serviceRoute: "telegraphic-transfer",
         "title": "Telegraphic Transfer/DD",
         "subtitle": "Transfer money to another bank or demand draft request"
     },
     {
-        serviceId: "mobile-number-change",
+        serviceRoute: "mobile-number-change",
         "title": "Mobile Number Change",
         "subtitle": "Change Mobile Number"
     },
     {
-        serviceId: "credit-card-request",
+        serviceRoute: "credit-card-request",
         "title": "Credit Card Request",
         "subtitle": "Request for anew credit card"
     }

@@ -86,7 +86,7 @@ class CashDeposit extends Component {
             totalSum,
             ...cashDenominationProps
         } = this.state;
-        const {bookCashDepositAppointment} = this.props;
+        
         return (
             <Wrapper styleString={` padding: 10px 40px; `}>
                 <Wrapper>
@@ -103,7 +103,12 @@ class CashDeposit extends Component {
                         <Text>HKD{numeral(totalSum).format('0,0.[00]')}</Text>
                     </CenterAlignWrapper>
                     <Wrapper styleString={` margin-top: 40px; `}>
-                        <Button full onPress={() => {bookCashDepositAppointment(this.state)}}>
+                        <Button full onPress={() => {
+                            this.props.history.push('/acknowledge-appointMent-booking', {
+                                ...this.props.location.state,
+                                ...this.state
+                            });
+                        }}>
                             <TextBase styleString={` color: #fff; `}>
                                 Continue
                             </TextBase>

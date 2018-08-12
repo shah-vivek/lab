@@ -20,7 +20,7 @@ class SmsCodeVerification extends Component {
     }
 
     onSMSCodeSubmit(){
-        this.props.onSMSVerified();
+        this.props.history.push('/acknowledge-activation');
     }
 
     onSMSCodeChange(smsCode){

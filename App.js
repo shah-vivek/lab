@@ -1,5 +1,5 @@
 import React from 'react';
-import { NativeRouter, Route, Link } from 'react-router-native';
+import { NativeRouter, Route, BackButton } from 'react-router-native';
 import hsbcVariables from './native-base-theme/variables/platform';
 import getTheme from './native-base-theme/components';
 import Layout from './layout';
@@ -20,156 +20,20 @@ const serviceToScreenIdMap = {
   "address-change": "addressChange"
 };
 
-const screenMap = {
-  "accountDetailsVerificationComponent": AccountDetails,
-  "smsVerificationComponent": SmsCodeVerification,
-  "acknowledgeActivation" : AcknowledgeActivation,
-  "branchSelection" : BranchSelection,
-  "timeSelection" : TimeSelection,
-  "serviceSelection" : ServiceSelection,
-  "cashDeposit": CashDeposit,
-  "acknowledgeAppointMentBooking": AcknowledgeAppointMentBooking
-};
 
-const screenHLayoutConfig = {
-  "accountDetailsVerificationComponent": {
-    title: "Mobile Security",
-    headerBGColor: "#262626"
-  }, 
-  "smsVerificationComponent": {
-    title: "Mobile Security",
-    headerBGColor: "#262626"
-  },
-  "acknowledgeActivation" : {
-    title: "Mobile Security",
-    headerBGColor: "#262626"
-  },
-  "branchSelection": {
-    title: "Book Appointment",
-    subtitle: "Select Branch",
-    headerBGColor: "#262626"
-  },
-  "timeSelection": {
-    title: "Book Appointment",
-    subtitle: "Prefered Time",
-    headerBGColor: "#262626"
-  },
-  "serviceSelection": {
-    title: "Select Service",
-    headerBGColor: "#262626"
-  },
-  "cashDeposit": {
-    title: "Cash Deposit",
-    "subtitle": "Enter Denominations",
-    headerBGColor: "#262626"
-  },
-  "acknowledgeAppointMentBooking": {
-    title: "Token Generated",
-    headerBGColor: "#262626",
-    contentBackgroundColor: "#76612C"
-  }
-};
-const getScreenPropsMap = (obj) => {
-  const accountDetailsProps = {
-      onAccountNumberSubmit : obj.onAccountNumberSubmit
-    };
-    const smsVerificationProps = {
-      onSMSVerified: obj.onSMSVerified
-    };
 
-    const acknowledgeActivationProps = {
-      onAcknowledgementReceived: obj.onAcknowledgementReceived
-    };
 
-    const branchSelectionProps = {
-      onBranchSelection: obj.onBranchSelection
-    }
-
-    const timeSelectionProps = {
-      onSlotSelection: obj.onSlotSelection
-    }
-
-    const serviceSelectionProps = {
-      onServiceSelection: obj.onServiceSelection
-    }
-    
-    const cashDepositProps = {
-      bookCashDepositAppointment: obj.bookCashDepositAppointment
-    }
-
-    const screenPropsMap = {
-      "accountDetailsVerificationComponent": accountDetailsProps,
-      "smsVerificationComponent": smsVerificationProps,
-      "acknowledgeActivation" :acknowledgeActivationProps,
-      "branchSelection": branchSelectionProps,
-      "serviceSelection": serviceSelectionProps,
-      "timeSelection" : timeSelectionProps,
-      "cashDeposit": cashDepositProps
-    };
-    return screenPropsMap;
-}
 
 export default class App extends React.Component {
-  onAccountNumberSubmit(accountNumber){
-    this.setState({
-      currentScreen: "accountDetailsVerificationComponent"
-    });
-  }
-
-  onSMSVerified(){
-    this.setState({
-      currentScreen: "acknowledgeActivation"
-    });
-  }
-
-  onAcknowledgementReceived(){
-    this.setState({
-      currentScreen: "branchSelection"
-    });
-  }
-
-  onBranchSelection() {
-    this.setState({
-      currentScreen: "timeSelection"
-    });
-  }
-
-  onSlotSelection(){
-    this.setState({
-      currentScreen: "serviceSelection"
-    });
-  }
-
-  onServiceSelection(selectedService) {
-    const currentScreen = serviceToScreenIdMap[selectedService] ? serviceToScreenIdMap[selectedService] : "addressChange";
-    this.setState({
-      currentScreen 
-    });
-  }
+  
   constructor(){
     super();
     this.state = {
-      isReady: false,
-      currentScreen: "acknowledgeAppointMentBooking"
-
+      isReady: false
     };
-    this.onAccountNumberSubmit = this.onAccountNumberSubmit.bind(this);
-    this.onSMSVerified = this.onSMSVerified.bind(this);
-    this.onAcknowledgementReceived = this.onAcknowledgementReceived.bind(this);
-    this.onBranchSelection = this.onBranchSelection.bind(this);
-    this.onSlotSelection = this.onSlotSelection.bind(this);
-    this.onServiceSelection = this.onServiceSelection.bind(this);
-    this.bookCashDepositAppointment = this.bookCashDepositAppointment.bind(this);
 
-    this._screenPropsMap = getScreenPropsMap(this);
   }
-  
-  bookCashDepositAppointment(cashDepositDetails){
-    alert("book cash deposit appointment with total cash "+ cashDepositDetails.totalSum);
-  }
-
   render() {
-    const {currentScreen} = this.state;
     if(!this.state.isReady){
       return (<View>
         <ReactText>Loading screens</ReactText>
@@ -177,23 +41,32 @@ export default class App extends React.Component {
     }
     
     
-    
-    const CurrentScreen = screenMap[currentScreen];
-    const currentScreenProps = this._screenPropsMap[currentScreen] || {};
-    
     return (
       <NativeRouter>
-        <StyleProvider style = {getTheme(hsbcVariables)}>
-          <Layout 
-            headerText = {screenHLayoutConfig[currentScreen].title} 
-            subtitle = {screenHLayoutConfig[currentScreen].subtitle || ''}
-            headerBGColor = {screenHLayoutConfig[currentScreen].headerBGColor || ''}
-            contentBackgroundColor = {screenHLayoutConfig[currentScreen].contentBackgroundColor || ''}
-            >
-            <Route exact path="/" component={AccountDetails}/>
-            
-          </Layout>
-        </StyleProvider>
+        <BackButton>
+          <StyleProvider style = {getTheme(hsbcVariables)}>
+            <Layout 
+              headerText = {"hsbc-mobile-app"} 
+              subtitle = {''}
+              headerBGColor = {''}
+              contentBackgroundColor = { ''}
+              >
+              <Route exact path="/" component={AccountDetails}/>
+              <Route exact path="/verify-sms-code" component={SmsCodeVerification}/>
+              <Route exact path="/acknowledge-activation" component={AcknowledgeActivation}/>
+              <Route exact path="/select-branch" component={BranchSelection}/>
+              <Route exact path="/select-time" component={TimeSelection}/>
+              <Route exact path="/select-service" component={ServiceSelection}/>
+              <Route exact path="/cash-deposit" component={CashDeposit}/>
+              <Route exact path="/acknowledge-appointMent-booking" component={AcknowledgeAppointMentBooking}/>
+              {/*
+                AccountDetails
+              
+              */}
+              
+            </Layout>
+          </StyleProvider>
+        </BackButton>
       </NativeRouter>
     );
   }

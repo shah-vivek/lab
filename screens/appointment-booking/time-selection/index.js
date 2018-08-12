@@ -27,10 +27,13 @@ class TimeSelection extends Component {
 
     render() {
         const {onSlotChanged} = this;
-        const {onSlotSelection} = this.props;
         const {
             selectedSlot
         } = this.state;
+        const serviceSelectionState = {
+            selectedSlot,
+            ...this.props.location.state
+        }
         return (
             <Wrapper styleString={` 
                         padding: 30px 40px; 
@@ -132,7 +135,10 @@ class TimeSelection extends Component {
                 >
                     <Button
                         full
-                        onPress={onSlotSelection}
+                        onPress={() => {
+                            console.log('state to be pased to next screen ', serviceSelectionState);
+                            this.props.history.push('/select-service',serviceSelectionState);
+                        }}
                     >
                         <Text 
                             styleString={`

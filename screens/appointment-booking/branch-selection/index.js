@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import {Wrapper} from '../../../layout';
 import {PickerField, Text, Button} from '../../../components';
-import { dates, preferedAreas, preferedDistricts, preferedPremierCentres, branchAddresses} from './data';
-
+import {dates, preferedAreas, preferedDistricts, preferedPremierCentres, branchAddresses} from './data';
 
 class BranchSelection extends Component {
     constructor(props) {
@@ -39,10 +38,8 @@ class BranchSelection extends Component {
             .bind(this);
     }
 
-    onDateChange(date){
-        this.setState({
-            date: date
-        });
+    onDateChange(date) {
+        this.setState({date: date});
     }
 
     onPreferedAreaChange(preferedArea) {
@@ -62,87 +59,69 @@ class BranchSelection extends Component {
     onPreferedDistrictChange(preferedDistrict) {
         const preferedPremierCentre = preferedPremierCentres[preferedDistrict][0].value;
         const branchAddress = branchAddresses[preferedPremierCentre];
-        this.setState({
-            preferedDistrict,
-            preferedPremierCentre,
-            branchAddress,
-            currentPreferedPremierCentre: preferedPremierCentres[preferedDistrict]
-        });
+        this.setState({preferedDistrict, preferedPremierCentre, branchAddress, currentPreferedPremierCentre: preferedPremierCentres[preferedDistrict]});
     }
 
     onPreferedPremierCenter(preferedPremierCentre) {
         const branchAddress = branchAddresses[preferedPremierCentre];
-        this.setState({
-            preferedPremierCentre,
-            branchAddress
-        });
+        this.setState({preferedPremierCentre, branchAddress});
     }
 
     render() {
-        const {onBranchSelection} = this.props;
+
         const {
             preferedArea,
             preferedDistrict,
             preferedPremierCentre,
             branchAddress,
-            currentPreferedDistricts, 
+            currentPreferedDistricts,
             currentPreferedPremierCentre,
             date
         } = this.state;
         return (
             <Wrapper styleString={` padding: 30px 40px; `}>
                 <PickerField
-                    selectedValue = {preferedArea}
+                    selectedValue={preferedArea}
                     valueMap={preferedAreas}
                     onChange={this.onPreferedAreaChange}
                     label="Prefered Area"/>
 
                 <PickerField
-                    selectedValue = {preferedDistrict}
+                    selectedValue={preferedDistrict}
                     valueMap={currentPreferedDistricts}
                     onChange={this.onPreferedDistrictChange}
                     label="Prefered District"/>
                 <PickerField
-                    selectedValue = {preferedPremierCentre}
+                    selectedValue={preferedPremierCentre}
                     valueMap={currentPreferedPremierCentre}
                     onChange={this.onPreferedPremierCenter}
                     label="Prefered Premier Center"/>
-                
-                <Wrapper styleString={`
-                    margin-top: 20px;
-                `}>
-                    <Text fontSize={16} >
+
+                <Wrapper styleString={` margin-top: 20px; `}>
+                    <Text fontSize={16}>
                         Address
                     </Text>
                 </Wrapper>
-                <Wrapper styleString={`
-                    margin-top: 10px;
-                    margin-bottom: 20px;
-                `}>
+                <Wrapper styleString={` margin-top: 10px; margin-bottom: 20px; `}>
                     <Text fontSize={18}>
                         {branchAddress}
                     </Text>
                 </Wrapper>
                 <PickerField
-                    selectedValue = {date}
+                    selectedValue={date}
                     valueMap={dates}
                     onChange={this.onDateChange}
                     label="Please choose a date"/>
-                <Wrapper
-                    styleString = {`
-                        padding: 30px 0px;
-                        padding-top: 40px; 
-                    `}
-                >
+                <Wrapper styleString={` padding: 30px 0px; padding-top: 40px; `}>
                     <Button
                         full
-                        onPress={onBranchSelection}
-                    >
-                        <Text 
-                            styleString={`
-                                color: #fff;
-                            `}
-                        >
+                        onPress={() => {
+                        console.log('state to be passed ', _.pick(this.state, ['preferedArea', 'preferedDistrict', 'preferedPremierCentre', 'branchAddress', 'date']));
+                        this.props
+                            .history
+                            .push('/select-time', _.pick(this.state, ['preferedArea', 'preferedDistrict', 'preferedPremierCentre', 'branchAddress', 'date']));
+                    }}>
+                        <Text styleString={` color: #fff; `}>
                             Continue
                         </Text>
                     </Button>

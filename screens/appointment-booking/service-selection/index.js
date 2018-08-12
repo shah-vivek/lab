@@ -4,7 +4,7 @@ import {Wrapper} from '../../../layout';
 import {Card} from '../../../components';
 import services from './data';
 
-const ServiceSelection = ({onServiceSelection}) => {
+const ServiceSelection = ({location, history}) => {
     return (
         <Wrapper styleString={` padding: 30px 40px; `}>
             {_map(services, service => {
@@ -13,7 +13,7 @@ const ServiceSelection = ({onServiceSelection}) => {
                     subtitle={service.subtitle}
                     key={service.serviceId}
                     onPress=
-                    { (e) => { onServiceSelection(service.serviceId);}}/>)
+                    { (e) => { history.push(service.serviceRoute, location.state);}}/>)
             })}
         </Wrapper>
     )

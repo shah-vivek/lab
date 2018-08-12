@@ -11,7 +11,7 @@ export default class AcknowledgeActivation extends Component {
     }
 
     onAcknowledgementReceived(){
-        this.props.onAcknowledgementReceived();
+        this.props.history.push('/select-branch');
     }
 
     render() {

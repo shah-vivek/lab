@@ -1,148 +1,65 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
-import {Wrapper} from '../../../layout';
-import {PickerField, Text, Button} from '../../../components';
-import { dates, preferedAreas, preferedDistricts, preferedPremierCentres, branchAddresses} from './data';
+import {View} from 'react-native';
+import {Button, Text, TextInput} from '../../components';
+import {Wrapper} from '../../layout';
 
+const validateAccountNumber = (accountNumber = '') => {
+    return /^\d{10,}$/.test(accountNumber);;
+};
 
-class BranchSelection extends Component {
+export default class AccountDetails extends Component {
     constructor(props) {
         super(props);
-        const preferedArea = preferedAreas[0].value;
-        const preferedDistrict = preferedDistricts[preferedArea][0].value;;
-        const preferedPremierCentre = preferedPremierCentres[preferedDistrict][0].value;
-        const branchAddress = branchAddresses[preferedPremierCentre];
+        this.onAccountNumberSubmit = this
+            .onAccountNumberSubmit
+            .bind(this);
+        this.onAccountNumberChange = this
+            .onAccountNumberChange
+            .bind(this);
+
         this.state = {
-            preferedArea,
-            preferedDistrict,
-            preferedPremierCentre,
-            branchAddress,
-            currentPreferedDistricts: preferedDistricts[preferedArea],
-            currentPreferedPremierCentre: preferedPremierCentres[preferedDistrict],
-            date: dates[0].value
+            accountNumber: props.accountNumber || '',
+            isAccountNumberValid: validateAccountNumber(props.accountNumber) || false,
+            isAccountFieldTouched: props.accountNumber
+        }
 
-        };
-        this.onPreferedAreaChange = this
-            .onPreferedAreaChange
-            .bind(this);
-
-        this.onPreferedDistrictChange = this
-            .onPreferedDistrictChange
-            .bind(this);
-
-        this.onPreferedPremierCenter = this
-            .onPreferedPremierCenter
-            .bind(this);
-
-        this.onDateChange = this
-            .onDateChange
-            .bind(this);
     }
 
-    onDateChange(date){
-        this.setState({
-            date: date
-        });
+    onAccountNumberSubmit() {
+        this
+            .props
+            .history
+            .push('/verify-sms-code', {accountNumber: this.state.accountNumber});
     }
 
-    onPreferedAreaChange(preferedArea) {
-        const preferedDistrict = preferedDistricts[preferedArea][0].value;;
-        const preferedPremierCentre = preferedPremierCentres[preferedDistrict][0].value;
-        const branchAddress = branchAddresses[preferedPremierCentre];
-        this.setState({
-            preferedArea,
-            preferedDistrict,
-            preferedPremierCentre,
-            branchAddress,
-            currentPreferedDistricts: preferedDistricts[preferedArea],
-            currentPreferedPremierCentre: preferedPremierCentres[preferedDistrict]
-        });
-    }
-
-    onPreferedDistrictChange(preferedDistrict) {
-        const preferedPremierCentre = preferedPremierCentres[preferedDistrict][0].value;
-        const branchAddress = branchAddresses[preferedPremierCentre];
-        this.setState({
-            preferedDistrict,
-            preferedPremierCentre,
-            branchAddress,
-            currentPreferedPremierCentre: preferedPremierCentres[preferedDistrict]
-        });
-    }
-
-    onPreferedPremierCenter(preferedPremierCentre) {
-        const branchAddress = branchAddresses[preferedPremierCentre];
-        this.setState({
-            preferedPremierCentre,
-            branchAddress
-        });
+    onAccountNumberChange(accountNumber) {
+        this.setState({accountNumber, isAccountNumberValid: validateAccountNumber(accountNumber), isAccountFieldTouched: true});
     }
 
     render() {
-        const {onBranchSelection} = this.props;
-        const {
-            preferedArea,
-            preferedDistrict,
-            preferedPremierCentre,
-            branchAddress,
-            currentPreferedDistricts, 
-            currentPreferedPremierCentre,
-            date
-        } = this.state;
+        const {isAccountNumberValid, isAccountFieldTouched} = this.state;
+        const {onAccountNumberSubmit} = this;
         return (
-            <Wrapper styleString={` padding: 30px 40px; `}>
-                <PickerField
-                    selectedValue = {preferedArea}
-                    valueMap={preferedAreas}
-                    onChange={this.onPreferedAreaChange}
-                    label="Prefered Area"/>
-
-                <PickerField
-                    selectedValue = {preferedDistrict}
-                    valueMap={currentPreferedDistricts}
-                    onChange={this.onPreferedDistrictChange}
-                    label="Prefered District"/>
-                <PickerField
-                    selectedValue = {preferedPremierCentre}
-                    valueMap={currentPreferedPremierCentre}
-                    onChange={this.onPreferedPremierCenter}
-                    label="Prefered Premier Center"/>
-                
-                <Wrapper styleString={`
-                    margin-top: 20px;
-                `}>
-                    <Text fontSize={16} >
-                        Address
-                    </Text>
-                </Wrapper>
-                <Wrapper styleString={`
-                    margin-top: 10px;
-                    margin-bottom: 20px;
-                `}>
-                    <Text fontSize={18}>
-                        {branchAddress}
-                    </Text>
-                </Wrapper>
-                <PickerField
-                    selectedValue = {date}
-                    valueMap={dates}
-                    onChange={this.onDateChange}
-                    label="Please choose a date"/>
+            <Wrapper >
                 <Wrapper
-                    styleString = {`
-                        padding: 30px 0px;
-                        padding-top: 40px; 
-                    `}
-                >
+                    styleString={` padding: 25px 25px; margin-top: 30px; background-color: #F7F7F7`}>
+                    <Text fontFamily="hsbc lt" styleString={`color: #404040`}>
+                        1. Enter your Account Number
+                    </Text>
+                </Wrapper>
+
+                <Wrapper styleString={` padding: 25px 25px;padding-top:0px; `}>
+                    <TextInput
+                        onChangeText={this.onAccountNumberChange}
+                        value={this.state.accountNumber}/>
                     <Button
+                        style={{
+                        marginTop: 35
+                    }}
                         full
-                        onPress={onBranchSelection}
-                    >
-                        <Text 
-                            styleString={`
-                                color: #fff;
-                            `}
-                        >
+                        onPress={onAccountNumberSubmit}
+                        disabled={!isAccountNumberValid}>
+                        <Text styleString={` color: #fff; `}>
                             Continue
                         </Text>
                     </Button>
@@ -151,5 +68,3 @@ class BranchSelection extends Component {
         )
     }
 }
-
-export default BranchSelection;
