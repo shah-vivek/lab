@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "sdkVersion": "27.0.0",
+    "platforms": ["android"],
+    "icon": "./assets/icons/logo.png",
+    "android": {
+      "package": "com.capgemini.hsbc_branch_transformartion_poc"
+    },
+    "androidStatusBar": {
+      
+      "barStyle": "light-content",
+      "backgroundColor": "#373b42"
+    }
+  }
+}
