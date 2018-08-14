@@ -77,7 +77,7 @@ const CashDenomination = (props) => {
                                     alignContent: 'center',
                                     width: '100%'
                                 }}>
-                                    <Text styleString={` color: #fff; `}>{label}</Text>
+                                    <Text fontSize= {16} styleString={` color: #fff; `}>{label}</Text>
                                 </Wrapper>
 
                             </Badge>

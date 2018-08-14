@@ -10,15 +10,17 @@ class TimeSelection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedSlot: null
+            selectedSlot: null,
+            slotLabel: null
         }
         this.onSlotChanged = this.onSlotChanged.bind(this);
     }
 
-    onSlotChanged(slotNo){
+    onSlotChanged(slotNo, slotLabel){
         console.log("Slot changed", slotNo);
         this.setState({
-            selectedSlot: slotNo
+            selectedSlot: slotNo,
+            slotLabel
         });
     }
 
@@ -28,10 +30,12 @@ class TimeSelection extends Component {
     render() {
         const {onSlotChanged} = this;
         const {
-            selectedSlot
+            selectedSlot,
+            slotLabel
         } = this.state;
         const serviceSelectionState = {
             selectedSlot,
+            slotLabel,
             ...this.props.location.state
         }
         return (
@@ -97,7 +101,7 @@ class TimeSelection extends Component {
                         const slotButtonProps = {
                             selected: isSelected,
                             disabled: isDisabled,
-                            onPress: () => onSlotChanged(slotConfig.slotNo)
+                            onPress: () => onSlotChanged(slotConfig.slotNo, slotConfig.label)
                         }
 
                         const textColor = isDisabled ? 'color: #AAA' : isSelected ? 'color: #fff' : '';
@@ -135,6 +139,7 @@ class TimeSelection extends Component {
                 >
                     <Button
                         full
+                        disabled = {!selectedSlot}
                         onPress={() => {
                             console.log('state to be pased to next screen ', serviceSelectionState);
                             this.props.history.push('/select-service',serviceSelectionState);

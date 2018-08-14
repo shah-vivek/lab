@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
-import {Button, Text, TextInput} from '../../components';
+import {Button, Text, TextInput, FormFieldLabel} from '../../components';
 import {Wrapper} from '../../layout';
 
 const validateAccountNumber = (accountNumber = '') => {
@@ -41,12 +40,7 @@ export default class AccountDetails extends Component {
         const {onAccountNumberSubmit} = this;
         return (
             <Wrapper >
-                <Wrapper
-                    styleString={` padding: 25px 25px; margin-top: 30px; background-color: #F7F7F7`}>
-                    <Text fontFamily="hsbc lt" styleString={`color: #404040`}>
-                        1. Enter your Account Number
-                    </Text>
-                </Wrapper>
+                <FormFieldLabel label="1. Enter your Account Number"/>
 
                 <Wrapper styleString={` padding: 25px 25px;padding-top:0px; `}>
                     <TextInput
@@ -61,6 +55,24 @@ export default class AccountDetails extends Component {
                         disabled={!isAccountNumberValid}>
                         <Text styleString={` color: #fff; `}>
                             Continue
+                        </Text>
+                    </Button>
+                </Wrapper>
+                <Wrapper styleString={` padding: 25px 25px;padding-top:0px; `}>
+
+                    <Button
+                        style={{
+                        marginTop: 60
+                    }}
+                        full
+                        onPress={() => {
+                        this
+                            .props
+                            .history
+                            .push('scan-qr-code');
+                    }}>
+                        <Text styleString={` color: #fff; `}>
+                            CHECK IN
                         </Text>
                     </Button>
                 </Wrapper>

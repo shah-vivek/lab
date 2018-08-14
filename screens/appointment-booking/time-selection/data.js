@@ -5,32 +5,32 @@ const availableTimeSlots = [
     {
         slotNo: 1,
         isAvailable: false,
-        label: '09.00 am'
+        label: '09.00 AM'
     },
     {
         slotNo: 2,
         isAvailable: false,
-        label: '09.30 am'
+        label: '09.30 AM'
     },
     {
         slotNo: 3,
         isAvailable: false,
-        label: '10.00 am'
+        label: '10.00 AM'
     },
     {
         slotNo: 4,
         isAvailable: false,
-        label: '10.30 am'
+        label: '10.30 AM'
     },
     {
         slotNo: 5,
         isAvailable: false,
-        label: '11.00 am'
+        label: '11.00 AM'
     },
     {
         slotNo: 6,
         isAvailable: false,
-        label: '11.30 am'
+        label: '11.30 AM'
     },
     {
         slotNo: 7,

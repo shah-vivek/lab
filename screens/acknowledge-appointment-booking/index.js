@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import {Button, CircularIcon, Text} from '../../components';
 import {Wrapper} from '../../layout';
+import moment from 'moment';
 
 const Row = Wrapper.extend `
     flex-direction: row;
@@ -16,10 +17,10 @@ export default class AcknowledgeAppointMentBooking extends Component {
     }
 
     render() {
-        const {onAcknowledgementReceived, appointmentDetails} = this.props;
-        const appointmentDate = "01-AUG-2018";
-        const slot = "04:00 PM";
-        const tokenNumber = "PS1010";
+        const currentAppState = this.props.location.state;
+        const appointmentDate = moment(currentAppState.date).format('DD-MMM-YYYY');
+        const slot = currentAppState.slotLabel;
+        const tokenNumber = currentAppState.tokenNumber ? "PS"+ (+currentAppState.tokenNumber.substring(2)+1):"PS1000";
         return (
             <Wrapper
                 styleString={`background-color: #76612C;; flex: 1; flex-direction: column; `}>
@@ -67,7 +68,7 @@ export default class AcknowledgeAppointMentBooking extends Component {
                         </Text>
                     </Row>
                 </Wrapper>
-                <Wrapper styleString={`margin-top: 100px;`}>
+                <Wrapper styleString={`margin: 50px;`}>
                     <Text
                         styleString={` text-align: center; font-size: 30px; font-family: "hsbc md"; color: #fff; `}>TOKEN NUMBER</Text>
                     <Text
@@ -75,13 +76,19 @@ export default class AcknowledgeAppointMentBooking extends Component {
                         {tokenNumber}
                     </Text>
                 </Wrapper>
-                {/* <Wrapper styleString={` padding: 30px 40px; padding-top: 130px; `}>
-                    <Button full onPress={() => {}}>
+                <Wrapper styleString={` margin-top:30px; padding: 30px 40px; padding-top: 30px; background-color: #fff `}>
+                    <Button full onPress={() => {
+                        this.props.history.replace('/select-branch',{
+                            ...currentAppState,
+                            tokenNumber
+
+                        });
+                    }}>
                         <Text styleString={` color: #fff; `}>
                             Book another appointment
                         </Text>
                     </Button>
-                </Wrapper> */}
+                </Wrapper>
             </Wrapper>
         )
     }

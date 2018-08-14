@@ -4,6 +4,9 @@ import AcknowledgeActivation from './acknowledge-activation';
 import {BranchSelection, TimeSelection, ServiceSelection} from './appointment-booking';
 import CashDeposit from './services/cash-deposit';
 import AcknowledgeAppointMentBooking from './acknowledge-appointment-booking';
+import AddressChange from './change-address';
+import ReviewAddress from './review-address';
+import {ScanQRCode, AcknowledgeCheckin} from './check-in';
 
 export {
     AccountDetails,
@@ -13,5 +16,9 @@ export {
     TimeSelection,
     ServiceSelection,
     CashDeposit,
-    AcknowledgeAppointMentBooking
+    AcknowledgeAppointMentBooking,
+    AddressChange,
+    ReviewAddress,
+    ScanQRCode,
+    AcknowledgeCheckin
 };

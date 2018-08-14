@@ -6,7 +6,7 @@ const services = [
         "subtitle": "Deposit cash at branch"
     },
     {
-        serviceRoute: "address-change",
+        serviceRoute: "change-address",
         "title": "Address Change",
         "subtitle": "Change primary communication address"
     },

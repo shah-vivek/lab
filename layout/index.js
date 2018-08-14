@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
 import styled from 'styled-components';
-import { Container, Header, Subtitle, Title, Left as LeftBase, Right as RightBase, Body as BodyBase, Content as ContentBase} from 'native-base';
+import {
+    Container,
+    Header,
+    Subtitle,
+    Title,
+    Left as LeftBase,
+    Right as RightBase,
+    Body as BodyBase,
+    Content as ContentBase
+} from 'native-base';
 import Wrapper from './Wrapper';
 
-export {
-    Wrapper
-}
+export {Wrapper}
 
 const flexStyle = `
     flex: 1;
@@ -27,71 +34,99 @@ const Body = styled(BodyBase)`
 
 const screenHLayoutConfig = {
     "verify-account-details": {
-      headerText: "Mobile Security",
-      headerBGColor: "#262626"
-    }, 
-    "verify-sms-code": {
-      headerText: "Mobile Security",
-      headerBGColor: "#262626"
+        headerText: "Mobile Security",
+        headerBGColor: "#262626"
     },
-    "acknowledge-activation" : {
-      headerText: "Mobile Security",
-      headerBGColor: "#262626"
+    "verify-sms-code": {
+        headerText: "Mobile Security",
+        headerBGColor: "#262626"
+    },
+    "acknowledge-activation": {
+        headerText: "Mobile Security",
+        headerBGColor: "#262626"
     },
     "select-branch": {
-      headerText: "Book Appointment",
-      subtitle: "Select Branch",
-      headerBGColor: "#262626"
+        headerText: "Book Appointment",
+        subtitle: "Select Branch",
+        headerBGColor: "#262626"
     },
     "select-time": {
-      headerText: "Book Appointment",
-      subtitle: "Prefered Time",
-      headerBGColor: "#262626"
+        headerText: "Book Appointment",
+        subtitle: "Prefered Time",
+        headerBGColor: "#262626"
     },
     "select-service": {
-      headerText: "Select Service",
-      headerBGColor: "#262626"
+        headerText: "Select Service",
+        headerBGColor: "#262626"
     },
     "cash-deposit": {
-      headerText: "Cash Deposit",
-      "subtitle": "Enter Denominations",
-      headerBGColor: "#262626"
+        headerText: "Cash Deposit",
+        "subtitle": "Enter Denominations",
+        headerBGColor: "#262626"
     },
     "acknowledge-appointMent-booking": {
-      headerText: "Token Generated",
-      headerBGColor: "#262626",
-      contentBackgroundColor: "#76612C"
+        headerText: "Token Generated",
+        headerBGColor: "#262626",
+        contentBackgroundColor: "#76612C"
+    },
+    "change-address": {
+        headerText: "Address Change",
+        subtitle: "Enter details",
+        headerBGColor: "#262626"
+    },
+    "review-address": {
+        headerText: "Review Address",
+        headerBGColor: "#262626"
+    },
+    "scan-qr-code": {
+        headerText: "SCAN BRANCH QR CODE TO CHECKIN",
+        headerBGColor: "#262626",
+        contentBackgroundColor: "#76612C"
+    },
+    "acknowledge-checkin": {
+        headerText: "CHECKIN COMPLETE",
+        headerBGColor: "#262626",
+        contentBackgroundColor: "#76612C"
     }
-  };
+};
 
+class Layout extends Component {
 
-
-class Layout extends Component{
-    
-    render(){
-        const currentRoute = this.props.location.pathname.substring(1) || 'verify-account-details';
-        console.log('current route is ',currentRoute);
+    render() {
+        const currentRoute = this
+            .props
+            .location
+            .pathname
+            .substring(1) || 'verify-account-details';
+        console.log('current route is ', currentRoute);
         const {headerText, headerBGColor, subtitle, contentBackgroundColor} = screenHLayoutConfig[currentRoute];
         const {children} = this.props;
-        const headerStyles = headerBGColor ? {
-            backgroundColor: headerBGColor
-        } : {};
+        const headerStyles = headerBGColor
+            ? {
+                backgroundColor: headerBGColor
+            }
+            : {};
         return (
             <Container>
-                <Header style = {headerStyles}>
+                <Header style={headerStyles}>
                     <Body>
-                        <Title style = {{
+                        <Title
+                            style={{
                             alignSelf: "center"
                         }}>{headerText}</Title>
-                        {subtitle ? <Subtitle style = {{
-                            alignSelf: "center"
-                        }}>{subtitle}</Subtitle> :null}
+                        {subtitle
+                            ? <Subtitle
+                                    style={{
+                                    alignSelf: "center"
+                                }}>{subtitle}</Subtitle>
+                            : null}
                     </Body>
-                    
+
                 </Header>
-                <ContentBase style = {{
+                <ContentBase
+                    style={{
                     backgroundColor: contentBackgroundColor || "#fff"
-                }} >
+                }}>
                     {children}
                 </ContentBase>
 

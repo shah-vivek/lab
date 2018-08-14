@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Text from '../text';
 import {Wrapper} from '../../layout';
+import Icon from '../icon';
 
 
 const CardContainer = styled.TouchableOpacity`
@@ -24,22 +25,26 @@ const CardContainer = styled.TouchableOpacity`
 
 const Card = ({title, subtitle, ...restProps}) => (
     <CardContainer {...restProps}>
-        <Wrapper styleString = {`
-            width: 100%;
-        `}>
-            <Text styleString = {`
-                font-size: 28px;
+        <Wrapper styleString= {`width: 90%`}>
+            <Wrapper styleString = {`
                 width: 100%;
-            `}>{title}</Text>
+            `}>
+                <Text styleString = {`
+                    font-size: 22px;
+                    width: 100%;
+                `}>{title}</Text>
+               
+            </Wrapper>
+            <Wrapper  styleString = {`
+                width: 100%;
+            `}>
+                <Text styleString = {`
+                    font-size: 16px;
+                    width: 80%;
+                `}>{subtitle}</Text>
+            </Wrapper>
         </Wrapper>
-        <Wrapper  styleString = {`
-            width: 100%;
-        `}>
-            <Text styleString = {`
-                font-size: 18px;
-                width: 80%;
-            `}>{subtitle}</Text>
-        </Wrapper>
+        <Icon type= "chevron-right" color="#000"/>
         
        
     </CardContainer>

@@ -11,7 +11,7 @@ const ServiceSelection = ({location, history}) => {
                 return (<Card
                     title={service.title}
                     subtitle={service.subtitle}
-                    key={service.serviceId}
+                    key={service.serviceRoute}
                     onPress=
                     { (e) => { history.push(service.serviceRoute, location.state);}}/>)
             })}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NativeRouter, Route, BackButton } from 'react-router-native';
+import { NativeRouter, Route, BackButton, Redirect } from 'react-router-native';
 import hsbcVariables from './native-base-theme/variables/platform';
 import getTheme from './native-base-theme/components';
 import Layout from './layout';
@@ -12,17 +12,12 @@ import {
     TimeSelection,
     ServiceSelection,
     CashDeposit,
-    AcknowledgeAppointMentBooking
+    AcknowledgeAppointMentBooking,
+    AddressChange,
+    ReviewAddress,
+    ScanQRCode,
+    AcknowledgeCheckin
 } from './screens';
-
-const serviceToScreenIdMap = {
-  "cash-deposit": "cashDeposit",
-  "address-change": "addressChange"
-};
-
-
-
-
 
 export default class App extends React.Component {
   
@@ -42,16 +37,11 @@ export default class App extends React.Component {
     
     
     return (
-      <NativeRouter>
+      <NativeRouter initialIndex={0} initialEntries={['/verify-account-details']} >
         <BackButton>
           <StyleProvider style = {getTheme(hsbcVariables)}>
-            <Layout 
-              headerText = {"hsbc-mobile-app"} 
-              subtitle = {''}
-              headerBGColor = {''}
-              contentBackgroundColor = { ''}
-              >
-              <Route exact path="/" component={AccountDetails}/>
+            <Layout>
+              <Route exact path="/verify-account-details" component={AccountDetails}/>
               <Route exact path="/verify-sms-code" component={SmsCodeVerification}/>
               <Route exact path="/acknowledge-activation" component={AcknowledgeActivation}/>
               <Route exact path="/select-branch" component={BranchSelection}/>
@@ -59,11 +49,10 @@ export default class App extends React.Component {
               <Route exact path="/select-service" component={ServiceSelection}/>
               <Route exact path="/cash-deposit" component={CashDeposit}/>
               <Route exact path="/acknowledge-appointMent-booking" component={AcknowledgeAppointMentBooking}/>
-              {/*
-                AccountDetails
-              
-              */}
-              
+              <Route exact path="/change-address" component={AddressChange}/>
+              <Route exact path="/review-address" component={ReviewAddress}/>
+              <Route exact path="/scan-qr-code" component={ScanQRCode}/>
+              <Route exact path="/acknowledge-checkin" component={AcknowledgeCheckin}/>              
             </Layout>
           </StyleProvider>
         </BackButton>
