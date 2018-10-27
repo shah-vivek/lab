@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "chatbot-20181016100519-authRole",
+            "UnauthRoleArn": "arn:aws:iam::458609888402:role/chatbot-20181016100519-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::458609888402:role/chatbot-20181016100519-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "chatbot-20181016100519-deployment",
+            "UnauthRoleName": "chatbot-20181016100519-unauthRole",
+            "StackName": "chatbot-20181016100519",
+            "StackId": "arn:aws:cloudformation:eu-west-1:458609888402:stack/chatbot-20181016100519/fd1084f0-d12a-11e8-af98-50a68645b236"
+        }
+    }
+}

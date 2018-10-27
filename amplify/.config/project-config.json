@@ -1,0 +1,20 @@
+{
+    "projectName": "chatbot",
+    "projectPath": "/home/ec2-user/environment/chatbot",
+    "defaultEditor": "sublime",
+    "frontendHandler": {
+        "javascript": "/home/ec2-user/.nvm/versions/node/v10.9.0/lib/node_modules/@aws-amplify/cli/node_modules/amplify-frontend-javascript"
+    },
+    "javascript": {
+        "framework": "react-native",
+        "config": {
+            "SourceDir": "src",
+            "DistributionDir": "dist",
+            "BuildCommand": "npm run-script build",
+            "StartCommand": "npm run-script start"
+        }
+    },
+    "providers": {
+        "awscloudformation": "/home/ec2-user/.nvm/versions/node/v10.9.0/lib/node_modules/@aws-amplify/cli/node_modules/amplify-provider-awscloudformation"
+    }
+}
