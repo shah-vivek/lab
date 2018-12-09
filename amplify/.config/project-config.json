@@ -15,6 +15,6 @@
         }
     },
     "providers": {
-        "awscloudformation": "/home/ec2-user/.nvm/versions/node/v10.9.0/lib/node_modules/@aws-amplify/cli/node_modules/amplify-provider-awscloudformation"
+        "awscloudformation": "amplify-provider-awscloudformation"
     }
 }

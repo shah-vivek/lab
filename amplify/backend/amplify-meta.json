@@ -10,5 +10,16 @@
             "StackName": "chatbot-20181016100519",
             "StackId": "arn:aws:cloudformation:eu-west-1:458609888402:stack/chatbot-20181016100519/fd1084f0-d12a-11e8-af98-50a68645b236"
         }
+    },
+    "auth": {
+        "path0finder0users": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/chatbot-20181016100519-deployment/amplify-cfn-templates/auth/path0finder0users-cloudformation-template.yml",
+                "logicalId": "authpath0finder0users"
+            },
+            "lastPushTimeStamp": "2018-10-30T10:21:46.213Z"
+        }
     }
 }
