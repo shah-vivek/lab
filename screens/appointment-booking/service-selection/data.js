@@ -11,19 +11,14 @@ const services = [
         "subtitle": "Change primary communication address"
     },
     {
-        serviceRoute: "telegraphic-transfer",
+        serviceRoute: "dd-telegraphic-transfer",
         "title": "Telegraphic Transfer/DD",
         "subtitle": "Transfer money to another bank or demand draft request"
     },
     {
-        serviceRoute: "mobile-number-change",
-        "title": "Mobile Number Change",
-        "subtitle": "Change Mobile Number"
-    },
-    {
-        serviceRoute: "credit-card-request",
-        "title": "Credit Card Request",
-        "subtitle": "Request for anew credit card"
+        serviceRoute: "cheque-details",
+        "title": "Cheque Deposit",
+        "subtitle": "Deposit Cheque at an ATM"
     }
 
 ];

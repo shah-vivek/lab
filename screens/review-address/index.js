@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DatePickerAndroid, TouchableOpacity} from 'react-native';
+import {Image} from 'react-native';
 import _ from 'lodash';
 import {Wrapper} from '../../layout';
 import {Text as TextBase, Button} from '../../components';
@@ -8,11 +8,10 @@ const Text = TextBase.extend `
     margin-top: 10px;
     font-family: 'hsbc rg'
 `
-const Row = Wrapper.extend`
+const Row = Wrapper.extend `
     margin-bottom: 30px;
     
 `;
-
 
 class ReviewAddress extends Component {
     constructor(props) {
@@ -20,7 +19,7 @@ class ReviewAddress extends Component {
     }
 
     render() {
-        const {addressLines, postalCode, selectedDesignation, effectiveDate, selectedCountry} = this.props.location.state;
+        const {addressLines, postalCode, selectedAddressType, effectiveDate, selectedCountry, documentImage} = this.props.location.state;
         return (
             <Wrapper styleString={` padding: 25px 25px; `}>
                 {_.map(lineLabels, (lineLabel, index) => {
@@ -65,12 +64,28 @@ class ReviewAddress extends Component {
                 </Row>
                 <Row>
                     <TextBase fontSize="16" fontFamily="hsbc lt" styleString={`width: 100%`}>
-                        Designation
+                        Address Type
                     </TextBase>
                     <Text styleString={`width: 100%`}>
-                        {selectedDesignation}
+                        {selectedAddressType}
                     </Text>
 
+                </Row>
+
+                <Row>
+                    <TextBase fontSize="16" fontFamily="hsbc lt" styleString={`width: 100%`}>
+                        Document proof
+                    </TextBase>
+                    <Wrapper styleString={`width: 100%; margin-top: 10px;align-items: center; justify-content: center;`}>
+                        <Image
+                            style={{
+                            height: 200,
+                            width: 200
+                        }}
+                            source={{
+                            uri: 'data:image/jpg;base64,' + documentImage.base64
+                        }}/>
+                    </Wrapper>
                 </Row>
 
                 <Button
@@ -80,7 +95,7 @@ class ReviewAddress extends Component {
                     this
                         .props
                         .history
-                        .push('/acknowledge-appointMent-booking', this.props.location.state);
+                        .push('/acknowledge-appointment-booking', this.props.location.state);
                 }}>
                     <TextBase styleString={`color: #fff`}>
                         Book appointment

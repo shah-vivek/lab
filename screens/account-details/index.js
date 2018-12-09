@@ -44,6 +44,7 @@ export default class AccountDetails extends Component {
 
                 <Wrapper styleString={` padding: 25px 25px;padding-top:0px; `}>
                     <TextInput
+                        keyboardType = 'numeric'
                         onChangeText={this.onAccountNumberChange}
                         value={this.state.accountNumber}/>
                     <Button

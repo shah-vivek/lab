@@ -7,6 +7,9 @@ import AcknowledgeAppointMentBooking from './acknowledge-appointment-booking';
 import AddressChange from './change-address';
 import ReviewAddress from './review-address';
 import {ScanQRCode, AcknowledgeCheckin} from './check-in';
+import DDTelegraphicTransfer from './dd_telegraphic-transfer';
+import ReviewDDTelegraphicTransfer from './review-dd-telegraphic-transfer';
+import ChequeDetails, {DepositCheque} from './cheque';
 
 export {
     AccountDetails,
@@ -20,5 +23,9 @@ export {
     AddressChange,
     ReviewAddress,
     ScanQRCode,
-    AcknowledgeCheckin
+    AcknowledgeCheckin,
+    DDTelegraphicTransfer,
+    ReviewDDTelegraphicTransfer,
+    ChequeDetails,
+    DepositCheque
 };

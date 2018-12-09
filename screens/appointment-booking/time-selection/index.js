@@ -110,7 +110,7 @@ class TimeSelection extends Component {
                                 slotConfig.slotNo
                             } styleString = {`
                                 
-                                width: 33%;
+                                width: 50%;
                                 padding: 5px;
                             
                             `}>
@@ -142,7 +142,7 @@ class TimeSelection extends Component {
                         disabled = {!selectedSlot}
                         onPress={() => {
                             console.log('state to be pased to next screen ', serviceSelectionState);
-                            this.props.history.push('/select-service',serviceSelectionState);
+                            this.props.history.push(this.props.history.location.state.serviceRoute,serviceSelectionState);
                         }}
                     >
                         <Text 

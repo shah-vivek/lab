@@ -1,53 +1,24 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {Button} from 'native-base';
+import {Permissions, Camera} from 'expo';
+import {Wrapper} from '../../layout';
+import {Modal} from 'react-native';
 import Text from '../text';
 import Icon from '../icon';
-import {Wrapper} from '../../layout';
-import {Permissions, Camera} from 'expo';
-import {Modal} from 'react-native';
 import SelectableButton from './SelectableButton';
-import ImageCaptureButton from './ImageCaptureButton';
 
-
-const SButton = styled(Button)`
-    ${props => props.disabled
-
-    ? "opacity: 0.5;"
-    : ""}
-`;
-
-export default SButton;
-
-
-const DocumentScannerButtonContainer = styled.TouchableOpacity `
+const ImageCaptureButtonContainer = styled.TouchableOpacity`
     width: 100%;
-    flex-direction: row;
+    height: 99%;
     justify-content: flex-end;
     padding: 15px;
-    border: 1px solid #AAA;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 20px;   
 `;
 
-/* const DocumentScannerButton = (props) => {
 
-    return (
-        <DocumentScannerButtonContainer {...props} >
-            <Text styleString={`
-                width: 65%;
-            `}>
-                Capture Document Proof
-            </Text>
-            <Wrapper styleString = {`width: 35%; flex-direction: row; justify-content: flex-end`}>
-                <Icon name="camera" size={30} />
-            </Wrapper>
 
-        </DocumentScannerButtonContainer>
-    )
-}; */
-
-class DocumentScannerButton extends Component {
+export default class ImageCaptureButtton extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -83,17 +54,16 @@ class DocumentScannerButton extends Component {
                 .camera
                 .takePictureAsync({base64 : true});
             this.setState({showCamera: false, documentProofImagePhoto: photo});
-            this.props.onDocumentCaptured(photo);
+            this.props.onImageCaptured(photo);
         }
     }
     
-    componentDidUpdate(){
-        //this.state.documentProofImagePhoto && this.props.onDocumentCaptured(this.state.documentProofImagePhoto);
-    }
+    
     render() {
         if (!this.state.renderComponent) {
             return <Text>Getting permission for accessing the camera</Text>;
         }
+        const {label} =  this.props;
         console.log('rendering camera components');
         return (
             <Wrapper>
@@ -122,22 +92,24 @@ class DocumentScannerButton extends Component {
                     </Wrapper>
                 </Modal>
 
-                <DocumentScannerButtonContainer
+                <ImageCaptureButtonContainer
                     onPress={() => {
                     this.setState({showCamera: true})
                 }}>
-                    <Text styleString={` width: 65%; `}>
-                        Capture Document Proof
-                    </Text>
                     <Wrapper
-                        styleString={`width: 35%; flex-direction: row; justify-content: flex-end`}>
-                        <Icon name="camera" size={30}/>
+                        styleString={`width: 100%;height: 80%;flex-direction: row; justify-content: center; align-items:center;`}>
+                        <Icon name="camera" size={60}/>
                     </Wrapper>
+                    <Wrapper styleString={`height: 20%;width: 100%;`}>
+                        <Text styleString={`text-align: center;`}>
+                            {label}
+                        </Text>
+                    </Wrapper>
+                    
 
-                </DocumentScannerButtonContainer>
+                </ImageCaptureButtonContainer>
 
             </Wrapper>
         )
     };
 }
-export {SelectableButton, DocumentScannerButton, ImageCaptureButton};

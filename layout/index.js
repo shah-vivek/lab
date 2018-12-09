@@ -6,8 +6,6 @@ import {
     Header,
     Subtitle,
     Title,
-    Left as LeftBase,
-    Right as RightBase,
     Body as BodyBase,
     Content as ContentBase
 } from 'native-base';
@@ -19,12 +17,7 @@ const flexStyle = `
     flex: 1;
 `;
 
-const Left = styled(LeftBase)`
-    flex: 0;
-`;
-const Right = styled(RightBase)`
-    flex: 0;
-`;
+
 
 const Body = styled(BodyBase)`
     ${flexStyle}
@@ -33,6 +26,10 @@ const Body = styled(BodyBase)`
 `;
 
 const screenHLayoutConfig = {
+    "select-service-area": {
+        headerText: "Select Service Area",
+        headerBGColor: "#262626"
+    },
     "verify-account-details": {
         headerText: "Mobile Security",
         headerBGColor: "#262626"
@@ -64,7 +61,15 @@ const screenHLayoutConfig = {
         "subtitle": "Enter Denominations",
         headerBGColor: "#262626"
     },
-    "acknowledge-appointMent-booking": {
+    "cheque-details": {
+        headerText: "Cheque Deposit",
+        headerBGColor: "#262626"
+    },
+    "deposit-cheque": {
+        headerText: "Cheque Deposit",
+        headerBGColor: "#262626"
+    },
+    "acknowledge-appointment-booking": {
         headerText: "Token Generated",
         headerBGColor: "#262626",
         contentBackgroundColor: "#76612C"
@@ -87,6 +92,16 @@ const screenHLayoutConfig = {
         headerText: "CHECKIN COMPLETE",
         headerBGColor: "#262626",
         contentBackgroundColor: "#76612C"
+    },
+    "dd-telegraphic-transfer": {
+        headerText: "Telegraphic Transfer/DD",
+        subtitle: "Enter Details",
+        headerBGColor: "#262626"
+    },
+    "review-dd-telegraphic-transfer": {
+        headerText: "Telegraphic Transfer/DD",
+        subtitle: "Review Details",
+        headerBGColor: "#262626"
     }
 };
 

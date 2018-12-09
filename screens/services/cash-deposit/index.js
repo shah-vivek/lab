@@ -104,7 +104,7 @@ class CashDeposit extends Component {
                     </CenterAlignWrapper>
                     <Wrapper styleString={` margin-top: 40px; `}>
                         <Button full onPress={() => {
-                            this.props.history.push('/acknowledge-appointMent-booking', {
+                            this.props.history.push('/acknowledge-appointment-booking', {
                                 ...this.props.location.state,
                                 ...this.state
                             });

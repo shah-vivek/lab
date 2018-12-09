@@ -103,7 +103,7 @@ class BranchSelection extends Component {
                     </Text>
                 </Wrapper>
                 <Wrapper styleString={` margin-top: 10px; margin-bottom: 20px; `}>
-                    <Text fontSize={18}>
+                    <Text fontFamily='hsbc rg' fontSize={18}>
                         {branchAddress}
                     </Text>
                 </Wrapper>
@@ -119,7 +119,7 @@ class BranchSelection extends Component {
                         console.log('state to be passed ', _.pick(this.state, ['preferedArea', 'preferedDistrict', 'preferedPremierCentre', 'branchAddress', 'date']));
                         this.props
                             .history
-                            .push('/select-time', _.pick(this.state, ['preferedArea', 'preferedDistrict', 'preferedPremierCentre', 'branchAddress', 'date']));
+                            .push('/select-time', {...this.props.history.location.state, ..._.pick(this.state, ['preferedArea', 'preferedDistrict', 'preferedPremierCentre', 'branchAddress', 'date'])});
                     }}>
                         <Text styleString={` color: #fff; `}>
                             Continue

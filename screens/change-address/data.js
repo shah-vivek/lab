@@ -1,15 +1,12 @@
 import moment from 'moment';
 
-const designations = [
+const addressType = [
     {
-        label: "Mr",
-        value: "Mr"
+        label: "Home",
+        value: "home"
     }, {
-        label: "Mrs",
-        value: "Mrs"
-    }, {
-        label: "Other",
-        value: "Other"
+        label: "Permanent",
+        value: "permanent"
     }
 ];
 
@@ -31,4 +28,4 @@ const countryList = [
 
 const lineLabels = ["Line 1","Line 2", "Line 3", "Line 4" ];
 
-export {countryList, designations, lineLabels}
+export {countryList, addressType, lineLabels}

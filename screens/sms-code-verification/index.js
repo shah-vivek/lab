@@ -40,18 +40,22 @@ class SmsCodeVerification extends Component {
         console.log(isSMSCodeValid);
         return (
             <Wrapper>
-                <FormFieldLabel label="2. Verify by SMS" subtitle = "We have sent a verification code to you at mobile number ******99"/>
+                <FormFieldLabel
+                    label="2. Verify by SMS"
+                    subtitle="We have sent a verification code to you at mobile number ******99"/>
 
                 <Wrapper styleString={` padding: 25px 25px;padding-top:0px; `}>
-                    <TextInput onChangeText={this.onSMSCodeChange} value={smsCode}/>
+                    <TextInput
+                        keyboardType='numeric'
+                        onChangeText={this.onSMSCodeChange}
+                        value={smsCode}/>
                     <Button full onPress={onSMSCodeSubmit} disabled={!isSMSCodeValid}>
                         <Text styleString={` color: #fff; `}>
                             Verify SMS
                         </Text>
-                    </Button> 
+                    </Button>
                 </Wrapper>
 
-                
             </Wrapper>
         )
     }

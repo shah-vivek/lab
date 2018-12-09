@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
 import {Button, CircularIcon, Text} from '../../components';
 import {Wrapper} from '../../layout';
 import moment from 'moment';
+import TokenNumberGenerator from '../../util/generate-token-number';
 
 const Row = Wrapper.extend `
     flex-direction: row;
@@ -20,7 +20,7 @@ export default class AcknowledgeAppointMentBooking extends Component {
         const currentAppState = this.props.location.state;
         const appointmentDate = moment(currentAppState.date).format('DD-MMM-YYYY');
         const slot = currentAppState.slotLabel;
-        const tokenNumber = currentAppState.tokenNumber ? "PS"+ (+currentAppState.tokenNumber.substring(2)+1):"PS1000";
+        const tokenNumber = TokenNumberGenerator.getTokenNumber();
         return (
             <Wrapper
                 styleString={`background-color: #76612C;; flex: 1; flex-direction: column; `}>
@@ -78,14 +78,12 @@ export default class AcknowledgeAppointMentBooking extends Component {
                 </Wrapper>
                 <Wrapper styleString={` margin-top:30px; padding: 30px 40px; padding-top: 30px; background-color: #fff `}>
                     <Button full onPress={() => {
-                        this.props.history.replace('/select-branch',{
-                            ...currentAppState,
+                        this.props.history.replace('/scan-qr-code', {
                             tokenNumber
-
                         });
                     }}>
                         <Text styleString={` color: #fff; `}>
-                            Book another appointment
+                            Check in
                         </Text>
                     </Button>
                 </Wrapper>

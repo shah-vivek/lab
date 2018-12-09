@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {DatePickerAndroid, TouchableOpacity} from 'react-native';
+import {DatePickerAndroid, Image} from 'react-native';
 import styled from 'styled-components';
 import _ from 'lodash';
 import moment from 'moment';
 import {Wrapper} from '../../layout';
-import {PickerField, Text as TextBase, TextInput, Button} from '../../components';
-import {countryList, designations, lineLabels} from './data';
+import {PickerField, Text as TextBase, TextInput, Button, DocumentScannerButton} from '../../components';
+import {countryList, addressType, lineLabels} from './data';
 
 const DatePickerField = styled.TouchableOpacity `
     height: 50px;
@@ -31,11 +31,11 @@ class AddressChange extends Component {
     constructor(props) {
         super(props);
         const selectedCountry = countryList[0].value;
-        const selectedDesignation = designations[2].value;
+        const selectedAddressType = addressType[0].value;
 
         this.state = {
             selectedCountry,
-            selectedDesignation,
+            selectedAddressType,
             addressLines: {
                 line1: null,
                 line2: null,
@@ -43,14 +43,18 @@ class AddressChange extends Component {
                 line4: null
             },
             postalCode: null,
-            effectiveDate: null
+            effectiveDate: null,
+            documentImage: null
         };
+        this.onDocumentCaptured = this
+            .onDocumentCaptured
+            .bind(this);
         this.onCountryChange = this
             .onCountryChange
             .bind(this);
 
-        this.onDesignationChange = this
-            .onDesignationChange
+        this.onAddressTypeChange = this
+            .onAddressTypeChange
             .bind(this);
 
         this.onAddressLineChange = this
@@ -69,8 +73,8 @@ class AddressChange extends Component {
     onCountryChange(selectedCountry) {
         this.setState({selectedCountry})
     }
-    onDesignationChange(selectedDesignation) {
-        this.setState({selectedDesignation});
+    onAddressTypeChange(selectedAddressType) {
+        this.setState({selectedAddressType});
     }
     onAddressLineChange(lineNumber, value) {
         const newAddressLines = {
@@ -103,8 +107,7 @@ class AddressChange extends Component {
 
     render() {
         const isButtonDisabled = !(this.state.addressLines.line1 && this.state.addressLines.line3 && this.state.addressLines.line3 && this.state.addressLines.line4 && this.state.postalCode && this.state.effectiveDate);
-        const {selectedCountry, selectedDesignation, addressLines, postalCode, effectiveDate} = this.state;
-        console.log("state of address screen ", this.props.location.state);
+        const {selectedCountry, selectedAddressType, addressLines, postalCode, effectiveDate, documentImage} = this.state;
         return (
             <Wrapper styleString={` padding: 25px 25px; `}>
                 {_.map(lineLabels, (lineLabel, index) => {
@@ -125,7 +128,10 @@ class AddressChange extends Component {
                     <Text fontSize="16" fontFamily="hsbc lt" styleString={`width: 100%`}>
                         Postal Code
                     </Text>
-                    <TextInput value={postalCode} onChangeText={this.onPostalCodeChange}/>
+                    <TextInput
+                        keyboardType='numeric'
+                        value={postalCode}
+                        onChangeText={this.onPostalCodeChange}/>
 
                 </Wrapper>
                 <Wrapper>
@@ -145,12 +151,13 @@ class AddressChange extends Component {
                     label="Country"/>
 
                 <PickerField
-                    selectedValue={selectedDesignation}
-                    valueMap={designations}
-                    onChange={this.onDesignationChange}
-                    label="Designation"/>
+                    selectedValue={selectedAddressType}
+                    valueMap={addressType}
+                    onChange={this.onAddressTypeChange}
+                    label="Address type"/>
+                <DocumentScannerButton onDocumentCaptured={this.onDocumentCaptured}/> 
                 <Button
-                    disabled = {isButtonDisabled}
+                    disabled={isButtonDisabled}
                     full
                     onPress={() => {
                     this
@@ -168,6 +175,11 @@ class AddressChange extends Component {
                 </Button>
             </Wrapper>
         )
+    }
+    onDocumentCaptured(documentImage) {
+        
+        this.setState({documentImage});
+        
     }
 }
 

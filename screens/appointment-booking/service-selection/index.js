@@ -4,6 +4,16 @@ import {Wrapper} from '../../../layout';
 import {Card} from '../../../components';
 import services from './data';
 
+const onPressEventHandler = (serviceRoute, history) => {
+    if(serviceRoute === "cheque-details"){
+        history.push(serviceRoute)
+        return;
+    }
+    history.push("select-branch", {
+        serviceRoute: serviceRoute
+    });
+}
+
 const ServiceSelection = ({location, history}) => {
     return (
         <Wrapper styleString={` padding: 30px 40px; `}>
@@ -12,8 +22,9 @@ const ServiceSelection = ({location, history}) => {
                     title={service.title}
                     subtitle={service.subtitle}
                     key={service.serviceRoute}
-                    onPress=
-                    { (e) => { history.push(service.serviceRoute, location.state);}}/>)
+                    onPress={() => {
+                        onPressEventHandler(service.serviceRoute, history)
+                    }}/>)
             })}
         </Wrapper>
     )
