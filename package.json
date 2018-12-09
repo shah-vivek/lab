@@ -1,0 +1,54 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "watch": {
+    "storybook": {
+      "patterns": [
+        "./components"
+      ],
+      "extensions": "js",
+      "quiet": false
+    }
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject",
+    "storybook": "storybook start",
+    "watch-sb": "npm-watch storybook",
+    "prestorybook": "rnstl"
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./components",
+        "./packages"
+      ],
+      "pattern": "**/stories.js",
+      "outputFile": "./storybook/storyLoader.js"
+    }
+  },
+  "dependencies": {
+    "expo": "^31.0.2",
+    "random-id": "^1.0.3",
+    "react": "16.5.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-chatbot": "0.0.1-alpha.9",
+    "styled-components": "^4.1.2"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^4.0.11",
+    "@storybook/addon-knobs": "^4.0.11",
+    "@storybook/addon-links": "^4.0.11",
+    "@storybook/addons": "^4.0.11",
+    "@storybook/react": "^4.0.11",
+    "@storybook/react-native": "^4.0.11",
+    "babel-preset-expo": "^5.0.0",
+    "metro-react-native-babel-preset": "^0.50.0",
+    "module-resolver": "^1.0.0",
+    "npm-watch": "^0.5.0",
+    "react-dom": "^16.6.3",
+    "react-native-storybook-loader": "^1.8.0"
+  },
+  "private": true
+}
